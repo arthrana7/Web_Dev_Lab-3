@@ -43,11 +43,45 @@ Query params for get all: `category`, `search`, `minPrice`, `maxPrice`, `sort` (
 
 Example: `/api/products?category=Electronics&sort=-price&page=1&limit=5`
 
+## Screenshots (Postman)
+
+### 1. Get All Products - `GET /api/products`
+Returns all products with pagination (total 12, page 1, 10 products per page).
+
+![Get all products](screenshots/01-get-all-products.png)
+
+### 2. Create Product - `POST /api/products`
+Creates a new product. Response is `201 Created`.
+
+![Create product](screenshots/02-create-product-post.png)
+
+### 3. Update Product - `PUT /api/products/:id`
+Updates price and quantity of the product created above. Response is `200 OK`.
+
+![Update product](screenshots/03-update-product-put.png)
+
+### 4. Delete Product - `DELETE /api/products/:id`
+Deletes the product using its id.
+
+![Delete product](screenshots/04-delete-product.png)
+
+### 5. Low-Stock Alert Report - `GET /api/products/low-stock`
+Shows the products whose quantity is less than or equal to the reorder level (count: 4).
+
+![Low stock report](screenshots/05-low-stock-report.png)
+
+### 6. Category-wise Inventory Summary - `GET /api/products/summary`
+Aggregation result with total items, total quantity, total stock value and average price for each category (5 categories).
+
+![Category summary](screenshots/06-category-summary.png)
+
+### 7. Stock Adjustment - `PATCH /api/products/:id/stock`
+Adds 10 to the stock of Study Table (quantity 2 became 12).
+
+![Stock adjustment](screenshots/07-stock-adjustment-patch.png)
+
 ## Notes
 
 - Low-stock and summary use MongoDB aggregation.
 - Stock can never go below 0 (a sale with not enough stock gives 400 error).
 - All errors are handled in one place (`middleware/errorHandler.js`).
-
-
-
